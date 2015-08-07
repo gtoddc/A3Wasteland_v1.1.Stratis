@@ -159,7 +159,7 @@ switch (_boxType) do
 		_boxItems =
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
-			["wep", "arifle_SDAR_F", 2],
+			["wep", "arifle_SDAR_F", 2, 8],
 			["itm", "V_RebreatherB", 2],
 			["itm", "V_RebreatherIR", 2],
 			["itm", "V_RebreatherIA", 2],
