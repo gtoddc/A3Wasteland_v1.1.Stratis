@@ -6,6 +6,14 @@
 //	@file Author: [404] Deadbeat
 //	@file Created: 28/12/2013 19:42
 
+// ******************************************************************************************
+// * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
+// ******************************************************************************************
+//	@file Version: 1.0
+//	@file Name: firstSpawn.sqf
+//	@file Author: [404] Deadbeat
+//	@file Created: 28/12/2013 19:42
+
 //Setup your UID Whitelist here 
 //Last Update by Timberwolf on 05-01-2015
 _whitelist = [
@@ -26,10 +34,14 @@ _whitelist = [
 "76561198170629122", //Alienware
 "76561198081199236", //Marcus
 "76561198152194918", //john
+"76561197982210764", //implosion222
 "76561198101489492", //Dominatezombies
 "76561197963758499", //built
 "76561198098273832", //Cutler
 "76561198164946794", //Nartho (Timbo)
+"76561198117012487", // Wolf T
+"76561197984853544", //RoadKill
+"76561198047781016", //Enchantedpotatos
 "76561198018457134" //Scrappy Ben
 
 ];
@@ -42,14 +54,13 @@ if(playerSide == OPFOR) then
 	{
 		hint "This team is white-listed UWS Members only!";
 		titleFadeOut 9999;
-		titleText [format["OPPFOR is Whitelisted"],"PLAIN",0];
+		titleText [format["OPFOR is Whitelisted"],"PLAIN",0];
 		[] spawn{
 			sleep 5;
 			endMission "Thank You";
 		}
 	};
 };
-
 
 [] execVM "client\functions\welcomeMessage.sqf";
 
@@ -97,6 +108,12 @@ player addEventHandler ["Put",
 }];
 
 player addEventHandler ["WeaponDisassembled", { _this spawn weaponDisassembledEvent }];
+player addEventHandler ["WeaponAssembled",
+{
+	_player = _this select 0;
+	_obj = _this select 1;
+	if (_obj isKindOf "UAV_01_base_F") then { _obj setVariable ["ownerUID", getPlayerUID _player, true] };
+}];
 
 player addEventHandler ["InventoryOpened",
 {
